@@ -1,0 +1,50 @@
+.navbar{
+    align-items: center;
+    background-image: linear-gradient(180deg, #000001e6 10%, #0F0F0F);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    transition: background-color .3s ease;
+    width: 100%;
+    z-index: 3;
+
+}
+.navbar span{
+    color: #1A98FF;
+
+}
+.navbar h2{
+    color: #E50914;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight:800;
+}
+.navbar-left{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+a{
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight:600;
+}
+.navbar-right img{
+
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+a:hover{
+    color: #E50914;
+    transition: color 0.3s;
+}
+.navbar.scrolled{
+    background-color: #141414;
+}

@@ -1,0 +1,59 @@
+
+.home-buttons{
+    margin: 50px;
+    display: flex;
+    gap: 10px;
+}
+.home-buttons :hover{
+    text-decoration: none;
+
+    border: 2px solid #E50914;
+    border-radius: 5px;
+    color: #E50914;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.home {
+    background: url('/src/assets/background/back.gif');
+    background-size: 110% ;
+    background-repeat: no-repeat;
+    width: 98%;
+    margin: 20px;   
+    margin-top: 80px;
+    height: 700px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-position: 50%;
+}
+.home-text h1{
+    font-size: 320%;
+    margin: 20px 0;
+    color: #ffffff;
+}
+.home-text p{
+    font-size: 120%;
+    margin: 20px 0;
+    color: #ffffff;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.home-text{
+    margin: 50px;
+    margin-top: 100px;
+}
+.home {
+    display: flex;
+    align-items: self-end;
+}
+.linkedin{
+    gap: 5PX;
+display: flex;
+align-items: center;
+}
+.home-buttons :hover{
+     box-shadow:0px 10px 14px rgba(176, 18, 18, 0.522);
+    transform: scale(1.02);
+
+}

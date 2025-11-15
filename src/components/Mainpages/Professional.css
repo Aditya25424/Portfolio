@@ -1,0 +1,217 @@
+/* PullRope.css - styles for PullRope.jsx */
+
+.pull-rope-root {
+  height: 100vh;
+  width: 100%;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+
+/* ============================
+   RIGHT-SIDE ROPE SECTION
+   ============================ */
+.rope-wrap {
+  position: absolute;
+  top: 0;
+  right: 6%;
+  height: 100%;
+  width: 160px;
+  pointer-events: none;
+}
+
+/* Rope string */
+.rope {
+  position: absolute;
+  right: calc(6% + 56px);
+  top: 0;
+  width: 6px;
+  height: 48vh;
+  background: repeating-linear-gradient(
+    45deg,
+    #3b2f24 0 4px,
+    #2b1f18 4px 8px
+  );
+  border-radius: 6px;
+  transform-origin: top center;
+  transition: transform 160ms linear;
+  pointer-events: none;
+}
+
+/* Knot above the handle */
+.knot {
+  position: absolute;
+  right: calc(6% + 40px);
+  top: calc(var(--rope-y) - 18px);
+  width: 34px;
+  height: 14px;
+  background: linear-gradient(180deg, #4a3729, #2b1f18);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* Circular pull handle */
+.handle {
+  --sz: 56px;
+  position: absolute;
+  right: 6%;
+  top: calc(var(--rope-y));
+  transform: translate(50%, -50%);
+  width: var(--sz);
+  height: var(--sz);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #e3c97c, #b07f2b);
+  box-shadow: 0 8px 22px rgba(176, 127, 43, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  pointer-events: auto;
+  border: none;
+  z-index: 10;
+  transition: box-shadow 120ms, transform 120ms;
+}
+
+.handle:active {
+  cursor: grabbing;
+  transform: translate(50%, -50%) scale(0.98);
+}
+
+/* ============================
+   SPOTLIGHT EFFECT
+   ============================ */
+
+/* Soft cone from the top */
+.spot-cone {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  
+  transform: translatey(0%);
+  transform: translateX(-80%);
+  width: 640px;
+  height: 420px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: var(--intensity);
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255, 250, 220, 0.20) 0%,
+    rgba(255, 240, 200, 0.12) 20%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  filter: blur(28px);
+  transition: opacity 120ms, transform 120ms;
+}
+
+/* Bright glow following spot center */
+.glow {
+  position: absolute;
+  left: var(--spot-x);
+  top: var(--spot-y);
+  transform: translate(-50%, -50%);
+  width: var(--spot-size);
+  height: var(--spot-size);
+  filter: blur(36px);
+  opacity: calc(var(--intensity));
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(
+    circle,
+    rgba(255, 250, 220, 0.85) 0%,
+    rgba(255, 250, 220, 0.25) 30%,
+    rgba(255, 250, 220, 0.04) 60%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  transition: width 140ms linear, height 140ms linear, opacity 140ms linear,
+    top 120ms linear;
+}
+
+.ground-reflection {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 245, 200, 0.95),
+    rgba(255, 245, 200, 0.25) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  filter: blur(28px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transition: width 180ms, height 180ms, opacity 160ms, transform 160ms;
+}
+
+/* ============================
+   TEXT AREA
+   ============================ */
+.text-area {
+  position: relative;
+  z-index: 5;
+  width: min(75ch, 90%);
+  max-width: 900px;
+  margin: 8vh auto 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.reveal-text {
+  font-size: clamp(24px, 4vw, 48px);
+  line-height: 1.05;
+  font-weight: 700;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  /* Light follows rope intensity */
+  background-image: radial-gradient(
+    circle at var(--spot-x) var(--spot-y),
+    rgba(255, 250, 220, calc(var(--intensity))) 0%,
+    rgba(255, 250, 220, calc(var(--intensity) * 0.6)) 20%,
+    rgba(255, 250, 220, 0.06) 40%,
+    rgba(0, 0, 0, 0) 60%
+  );
+
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.8);
+  transition: background-position 80ms linear, background-size 120ms linear;
+}
+
+.hint {
+  color: #888;
+  font-size: 14px;
+  margin-top: 12px;
+  opacity: 0.6;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 640px) {
+  .spot-cone {
+    width: 420px;
+    height: 260px;
+  }
+
+  .handle {
+    --sz: 46px;
+    right: 4%;
+  }
+
+  .rope {
+    right: calc(4% + 48px);
+  }
+
+  .knot {
+    right: calc(4% + 32px);
+  }
+}
