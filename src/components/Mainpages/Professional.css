@@ -1,34 +1,48 @@
-/* PullRope.css - styles for PullRope.jsx */
+/* PullRope-pull-effect.css - visual states for pulling the rope */
 
+/* ===== tweakable vars ===== */
+:root{
+  --nav-height: 72px;
+  --spot-x: 50%;
+  --spot-y: 45%;
+  --spot-size: 360px;
+
+  /* dynamic vars (changed while dragging) */
+  --rope-y: 18vh;         /* default handle vertical position */
+  --pull-distance: 0vh;   /* how far user has pulled (0 -> positive) */
+  --tilt-angle: 0deg;     /* rope tilt during pull */
+  --intensity: 0;         /* spotlight intensity (0..1) */
+}
+
+/* container */
 .pull-rope-root {
-  height: 100vh;
-  width: 100%;
-  background: #000;
   position: relative;
+  height: calc(100vh - var(--nav-height));
+  padding-top: var(--nav-height);
+  background: radial-gradient(ellipse at center, #050505 0%, #000 60%);
   overflow: hidden;
   color: #fff;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
 }
 
-/* ============================
-   RIGHT-SIDE ROPE SECTION
-   ============================ */
+/* rope area */
 .rope-wrap {
   position: absolute;
-  top: 0;
+  top: var(--nav-height);
   right: 6%;
-  height: 100%;
+  height: calc(100% - var(--nav-height));
   width: 160px;
   pointer-events: none;
+  z-index: 8;
 }
 
-/* Rope string */
+/* rope string */
 .rope {
   position: absolute;
   right: calc(6% + 56px);
   top: 0;
-  width: 6px;
-  height: 48vh;
+  width: 8px;
+  height: calc(24vh + var(--pull-distance)); /* grows visually with pull */
   background: repeating-linear-gradient(
     45deg,
     #3b2f24 0 4px,
@@ -36,30 +50,33 @@
   );
   border-radius: 6px;
   transform-origin: top center;
-  transition: transform 160ms linear;
+  transform: rotate(calc(var(--tilt-angle)));
+  transition: height 120ms linear, transform 120ms ease-out;
   pointer-events: none;
+  z-index: 9;
 }
 
-/* Knot above the handle */
+/* knot */
 .knot {
   position: absolute;
   right: calc(6% + 40px);
-  top: calc(var(--rope-y) - 18px);
+  top: calc(var(--rope-y) + var(--pull-distance) - 18px);
   width: 34px;
   height: 14px;
   background: linear-gradient(180deg, #4a3729, #2b1f18);
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   pointer-events: none;
+  z-index: 11;
 }
 
-/* Circular pull handle */
+/* handle */
 .handle {
   --sz: 56px;
   position: absolute;
   right: 6%;
-  top: calc(var(--rope-y));
-  transform: translate(50%, -50%);
+  top: calc(var(--rope-y) + var(--pull-distance));
+  transform: translate(0, -50%); /* align relative to right */
   width: var(--sz);
   height: var(--sz);
   border-radius: 50%;
@@ -70,33 +87,30 @@
   justify-content: center;
   cursor: grab;
   pointer-events: auto;
-  border: none;
-  z-index: 10;
-  transition: box-shadow 120ms, transform 120ms;
+  z-index: 12;
+  transition: transform 120ms, box-shadow 120ms, top 80ms linear;
 }
 
-.handle:active {
-  cursor: grabbing;
-  transform: translate(50%, -50%) scale(0.98);
+/* active grab */
+.handle:active { cursor: grabbing; }
+
+/* tiny visual "press" down */
+.handle.grabbing {
+  transform: translate(0, -50%) scale(0.98);
+  box-shadow: 0 6px 16px rgba(176,127,43,0.18);
 }
 
-/* ============================
-   SPOTLIGHT EFFECT
-   ============================ */
-
-/* Soft cone from the top */
+/* spotlight cone (soft from ceiling) */
 .spot-cone {
   position: absolute;
   left: 50%;
-  top: 0;
-  
-  transform: translatey(0%);
-  transform: translateX(-80%);
+  top: 8%;
+  transform: translateX(-50%);
   width: 640px;
   height: 420px;
   pointer-events: none;
-  z-index: 2;
-  opacity: var(--intensity);
+  z-index: 3;
+  opacity: calc(var(--intensity) * 0.9);
   mix-blend-mode: screen;
   background: radial-gradient(
     ellipse at 50% 0%,
@@ -108,7 +122,7 @@
   transition: opacity 120ms, transform 120ms;
 }
 
-/* Bright glow following spot center */
+/* glow centered on spot */
 .glow {
   position: absolute;
   left: var(--spot-x);
@@ -116,28 +130,28 @@
   transform: translate(-50%, -50%);
   width: var(--spot-size);
   height: var(--spot-size);
-  filter: blur(36px);
+  filter: blur(46px);
   opacity: calc(var(--intensity));
   pointer-events: none;
-  z-index: 3;
+  z-index: 5;
   background: radial-gradient(
     circle,
-    rgba(255, 250, 220, 0.85) 0%,
+    rgba(255, 250, 220, 0.9) 0%,
     rgba(255, 250, 220, 0.25) 30%,
     rgba(255, 250, 220, 0.04) 60%,
-    rgba(0, 0, 0, 0) 80%
+    rgba(0, 0, 0, 0) 100%
   );
-  transition: width 140ms linear, height 140ms linear, opacity 140ms linear,
-    top 120ms linear;
+  transition: width 140ms linear, height 140ms linear, opacity 140ms linear, left 120ms linear, top 120ms linear;
 }
 
+/* ground reflection */
 .ground-reflection {
   position: absolute;
-  left: 50%;
-  top: 58%;
-  transform: translateX(-50%);
-  width: 240px;
-  height: 40px;
+  left: var(--spot-x);
+  top: calc(var(--spot-y) + 20vh);
+  transform: translateX(-50%) translateY(-10%);
+  width: 340px;
+  height: 80px;
   border-radius: 50%;
   background: radial-gradient(
     ellipse at center,
@@ -149,31 +163,29 @@
   opacity: 0;
   pointer-events: none;
   z-index: 2;
-  transition: width 180ms, height 180ms, opacity 160ms, transform 160ms;
+  transition: opacity 160ms, transform 160ms, width 180ms, height 180ms;
 }
 
-/* ============================
-   TEXT AREA
-   ============================ */
+/* text area centered in lit zone */
 .text-area {
-  position: relative;
-  z-index: 5;
+  position: absolute;
+  left: var(--spot-x);
+  top: calc(var(--spot-y) + 6vh);
+  transform: translate(-50%, -50%);
+  z-index: 6;
   width: min(75ch, 90%);
   max-width: 900px;
-  margin: 8vh auto 0;
   text-align: center;
   pointer-events: none;
 }
 
+/* reveal text */
 .reveal-text {
-  font-size: clamp(24px, 4vw, 48px);
-  line-height: 1.05;
+  font-size: 20px;
   font-weight: 700;
   color: transparent;
-  background-clip: text;
   -webkit-background-clip: text;
-
-  /* Light follows rope intensity */
+  background-clip: text;
   background-image: radial-gradient(
     circle at var(--spot-x) var(--spot-y),
     rgba(255, 250, 220, calc(var(--intensity))) 0%,
@@ -181,37 +193,53 @@
     rgba(255, 250, 220, 0.06) 40%,
     rgba(0, 0, 0, 0) 60%
   );
-
   text-shadow: 0 6px 24px rgba(0, 0, 0, 0.8);
   transition: background-position 80ms linear, background-size 120ms linear;
 }
 
-.hint {
-  color: #888;
-  font-size: 14px;
-  margin-top: 12px;
-  opacity: 0.6;
+/* =======================
+   Pulling / Pulled State
+   ======================= */
+
+/* While the user is dragging/pulling: increase pull vars, tilt the rope and reveal light */
+.pull-rope-root.pulling {
+  /* the pull-distance is additive; you may update it via JS to reflect exact drag amount */
+  --tilt-angle: 6deg;
+  --intensity: 0.6;      /* gentle reveal while pulling */
+  --spot-size: 420px;
 }
 
-/* ============================
-   RESPONSIVE
-   ============================ */
+/* stronger reveal when pulled enough (toggle .pulled via JS when threshold reached) */
+.pull-rope-root.pulled {
+  --tilt-angle: 10deg;
+  --intensity: 1;        /* fully on */
+  --spot-size: 520px;
+  /* raise the ground reflection visibility */
+}
+
+/* ground reflection appears when pulled sufficiently */
+.pull-rope-root.pulled .ground-reflection {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  width: 520px;
+  height: 140px;
+}
+
+/* handle visual when actively grabbing */
+.pull-rope-root.pulling .handle,
+.pull-rope-root.pulled .handle {
+  box-shadow: 0 10px 30px rgba(176,127,43,0.28);
+}
+
+/* tiny tilt of the handle relative to rope when pulled */
+.pull-rope-root.pulling .handle { transform: translate(0, -50%) rotate(2deg); }
+.pull-rope-root.pulled  .handle { transform: translate(0, -50%) rotate(4deg); }
+
+/* adapt for small screens */
 @media (max-width: 640px) {
-  .spot-cone {
-    width: 420px;
-    height: 260px;
-  }
-
-  .handle {
-    --sz: 46px;
-    right: 4%;
-  }
-
-  .rope {
-    right: calc(4% + 48px);
-  }
-
-  .knot {
-    right: calc(4% + 32px);
-  }
+  .rope { right: calc(4% + 48px); }
+  .knot { right: calc(4% + 32px); }
+  .handle { --sz: 46px; right: 4%; }
+  .spot-cone { width: 420px; height: 260px; top: 6%; }
+  .glow { width: 260px; height: 260px; }
 }

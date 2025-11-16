@@ -136,7 +136,7 @@ export default function Professional({
     }
 
     function onPointerUp(e) {
-      try { if (h.releasePointerCapture) h.releasePointerCapture(e.pointerId); } catch {}
+      try { if (h.releasePointerCapture) h.releasePointerCapture(e.pointerId); } catch { }
       endDrag();
     }
 
@@ -170,10 +170,9 @@ export default function Professional({
       >
         <div className="rope-wrap">
           <div ref={ropeRef} className="rope" />
-          <div className="knot" />
           <button ref={handleRef} className="handle" aria-label="Pull the rope">
             <svg width="28" height="28" viewBox="0 0 24 24">
-              <circle cx="12" cy="7" r="3" fill="rgba(0,0,0,0.06)" />
+              <circle r="2" fill="rgba(0,0,0,0.06)" />
               <rect x="10" y="11" width="4" height="7" rx="1.5" fill="rgba(0,0,0,0.08)" />
             </svg>
           </button>
