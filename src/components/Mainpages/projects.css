@@ -1,0 +1,11 @@
+.projects-container{
+    display: flex;
+    align-items: center;
+    height: 90vh;
+}
+.project-mid{
+    margin: 20px;
+    display: flex;
+    flex-flow: column;
+    
+}
