@@ -21,11 +21,14 @@ const Navbar = () => {
     const goToHireMe = () => {
         navigate("/HireMe");
     }; 
+      const goTostart = () => {
+        navigate("/");
+    }; 
     return (
         <div>
             <div className='navbar'>
                 <div className='navbar-left'  style={{cursor : " pointer"}}>
-                    <h2 onClick={goToHome}>ADITYA <span>SHARMA</span></h2>
+                    <h2 onClick={goTostart}>ADITYA <span>SHARMA</span></h2>
                     <a onClick={goToHome}>Home</a>
                     <a onClick={goToSkills}>Skills</a>
                     <a onClick={goToProfessional} >Professional</a>

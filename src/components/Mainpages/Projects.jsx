@@ -9,7 +9,7 @@ const Projects = () => {
   },
   {
     project_name :"Blood unity",
-    project_image:"src/assets/projects/Dronathon.png",
+    project_image:"src/assets/projects/Bloodunity.png",
     project_description:"Blood donation app",
   },
   {
@@ -19,13 +19,10 @@ const Projects = () => {
   },
   {
     project_name :"more to come soon",
-    project_image:"",
+    project_image:"src/assets/projects/Bloodunity.png",
     project_description:"good things takes time",
   },
 ]
-
-
-
   return (
     <div>
      
@@ -34,18 +31,19 @@ const Projects = () => {
           <Navbar />
         </div>
         <div className='project-mid'>
-           {
+          <div className='pro-box' >
+                       {
         user_projects.map((data)=>(
-          <div key={data.id}> 
+          <div key={data.id} className='proj-box'> 
            <h3>{data.project_name}</h3>
-            <img src={data.project_image}></img>
+            <img src={data.project_image} ></img>
           <p>{data.project_description}</p>
           </div>
      )) }
+          </div>
         </div>
         </div>
       </div>
-
   )
 }
 

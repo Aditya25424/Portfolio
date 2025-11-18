@@ -1,11 +1,22 @@
-.projects-container{
-    display: flex;
-    align-items: center;
-    height: 90vh;
-}
 .project-mid{
     margin: 20px;
     display: flex;
     flex-flow: column;
-    
+    overflow-x: scroll;
+    scrollbar-width: none;
+   
+}
+.pro-box{
+ display: flex; gap: 10px;
+}
+.proj-box img{
+    border-radius: 2%;
+    width: 50vh;
+}
+.proj-box{
+    padding: 7px;
+    max-height: 70vh;
+    width: 52vh;
+   border-radius: 5%;
+    background-color: rgb(87, 84, 80);
 }
