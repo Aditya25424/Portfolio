@@ -5,7 +5,7 @@ import Navbar from '/src/components/navbar/Navbar'
 import bloodunity from "../../assets/projects/Bloodunity.png";
 import esper from "../../assets/projects/esper.png";
 import dronathon from "../../assets/projects/Dronathon.png";
-import "./Projects.css";
+import "./projects.css";
 
 
 
