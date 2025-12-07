@@ -17,9 +17,7 @@ const HireMe = () => {
                             <h1>CONTACT ME</h1>
                             <br />
                             <div>
-                                <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores itaque quibusdam
-                                    tempora corrupti voluptatum nulla,earum vel assumenda quos voluptatem facilis sint
-                                     quisquam rem delectus ratione officiis quia ullam ea.</h3>
+                                <h3>Hi! I’m Aditya Sharma, a full-stack developer who runs on React.js for smooth UIs, Spring Boot for powerful backends, and MySQL for rock-solid data—basically, I build websites that don’t just look good, they actually work (magic included ✨). I love turning wild ideas into real, fast, responsive, and scalable applications, fixing bugs like a boss, and making users go “Wow, this is clean!” If you need a developer who codes with passion, delivers on time, communicates clearly, and treats your project like their own—congrats, you just found your guy. Hire me before your competitor does. 😏🚀.</h3>
                                      <br />
                             </div>
                             <div style={{display:"contents"}} >
