@@ -87,8 +87,6 @@ background-color: #0F0F0F;
   font-weight: 500;
 }
 
-/* ===== BUTTONS ===== */
-
 .project-buttons {
   display: flex;
   gap: 12px;
@@ -125,8 +123,6 @@ background-color: #0F0F0F;
 .btn-github:hover {
   background-color: #e5e7eb;
 }
-
-/* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
   .projects-title {
