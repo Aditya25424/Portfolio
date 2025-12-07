@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Skills.css"
+
 import Navbar from '/src/components/navbar/Navbar'
 import { FaReact, FaNodeJs, FaAws, FaDocker, FaGitAlt, FaJava, FaAndroid } from 'react-icons/fa';
 import { SiMysql, SiSpringboot, SiNetlify, SiHtml5, SiCss3, SiImessage, SiCanva, SiNodedotjs, SiMongodb } from 'react-icons/si';

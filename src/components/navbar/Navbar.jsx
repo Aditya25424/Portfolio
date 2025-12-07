@@ -1,13 +1,16 @@
 import React from 'react'
+import DefaultImage from '../../assets/userlogo/Stalker.png';
 
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
 
 import './Navbar.css'
+import { DefaultContext } from 'react-icons';
 const Navbar = () => {
       const location = useLocation();
-  const userImage = location.state?.userImage ;
+  const userImage = location.state?.userImage || DefaultImage;
+
 
     const navigate = useNavigate();
       const goToHome = () => {
