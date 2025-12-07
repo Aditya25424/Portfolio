@@ -13,7 +13,7 @@ const MoreReasons = () => {
             "title": "Proven Experience Through Real Projects",
                         "image": "/src/assets/Todayspicks/Skills.gif",
 
-            "description": "I have built real projects like the Dronathoan website, BloodUnity App, and Swachhta Sainik platform, gaining practical development experience."
+            "description": "I have built real projects like the ESPER APP ,Dronathoan website, BloodUnity App, and Swachhta Sainik platform, gaining practical development experience."
         },
         {
             "id": 3,

@@ -1,9 +1,14 @@
 import React from 'react'
 import Stalker from "/src/assets/userlogo/stalker.jpg";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+
 
 import './Navbar.css'
 const Navbar = () => {
+      const location = useLocation();
+  const userImage = location.state.userImage ;
+
     const navigate = useNavigate();
       const goToHome = () => {
         navigate("/Homepage");
@@ -37,7 +42,7 @@ const Navbar = () => {
                 </div>
         
                 <div className='navbar-right'>
-            <img src={Stalker} alt="img" />
+            <img src={userImage} alt="img" />
                 </div>
             </div>
         </div>

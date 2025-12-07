@@ -17,9 +17,12 @@ const Home = () => {
                 
                 <div className='home-text'>
                     <h1>Adii - THE DEVELOPER</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ullam deserunt amet iure similique doloribus pariatur, ab soluta at
-                        facilis aut autem a ex ducimus vitae consectetur nulla dolorem cumque cum?</p>
+                    <p>I’m a full-stack developer skilled in building modern web applications 
+                        using Spring Boot for the backend and React.js for the frontend. I 
+                        also have experience working with MySQL databases, allowing me to handle 
+                        the full development cycle from 
+                        designing user interfaces to implementing robust server-side logic.
+                        </p>
 
                 </div>
                 <div className='home-buttons'>

@@ -1,245 +1,162 @@
-/* PullRope-pull-effect.css - visual states for pulling the rope */
-
-/* ===== tweakable vars ===== */
-:root{
-  --nav-height: 72px;
-  --spot-x: 50%;
-  --spot-y: 45%;
-  --spot-size: 360px;
-
-  /* dynamic vars (changed while dragging) */
-  --rope-y: 18vh;         /* default handle vertical position */
-  --pull-distance: 0vh;   /* how far user has pulled (0 -> positive) */
-  --tilt-angle: 0deg;     /* rope tilt during pull */
-  --intensity: 0;         /* spotlight intensity (0..1) */
+.career-section {
+  background: #0F0F0F;
+  padding: 100px 20px;
 }
 
-/* container */
-.pull-rope-root {
-  position: relative;
-  height: calc(100vh - var(--nav-height));
-  padding-top: var(--nav-height);
-  background: radial-gradient(ellipse at center, #050505 0%, #000 60%);
-  overflow: hidden;
-  color: #fff;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+.career-container {
+  max-width: 1100px;
+  margin: auto;
 }
 
-/* rope area */
-.rope-wrap {
-  position: absolute;
-  top: var(--nav-height);
-  right: 6%;
-  height: calc(100% - var(--nav-height));
-  width: 160px;
-  pointer-events: none;
-  z-index: 8;
-}
-
-/* rope string */
-.rope {
-  position: absolute;
-  right: calc(6% + 56px);
-  top: 0;
-  width: 8px;
-  height: calc(24vh + var(--pull-distance)); /* grows visually with pull */
-  background: repeating-linear-gradient(
-    45deg,
-    #3b2f24 0 4px,
-    #2b1f18 4px 8px
-  );
-  border-radius: 6px;
-  transform-origin: top center;
-  transform: rotate(calc(var(--tilt-angle)));
-  transition: height 120ms linear, transform 120ms ease-out;
-  pointer-events: none;
-  z-index: 9;
-}
-
-/* knot */
-.knot {
-  position: absolute;
-  right: calc(6% + 40px);
-  top: calc(var(--rope-y) + var(--pull-distance) - 18px);
-  width: 34px;
-  height: 14px;
-  background: linear-gradient(180deg, #4a3729, #2b1f18);
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-  pointer-events: none;
-  z-index: 11;
-}
-
-/* handle */
-.handle {
-  --sz: 56px;
-  position: absolute;
-  right: 6%;
-  top: calc(var(--rope-y) + var(--pull-distance));
-  transform: translate(0, -50%); /* align relative to right */
-  width: var(--sz);
-  height: var(--sz);
-  border-radius: 50%;
-  background: linear-gradient(180deg, #e3c97c, #b07f2b);
-  box-shadow: 0 8px 22px rgba(176, 127, 43, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: grab;
-  pointer-events: auto;
-  z-index: 12;
-  transition: transform 120ms, box-shadow 120ms, top 80ms linear;
-}
-
-/* active grab */
-.handle:active { cursor: grabbing; }
-
-/* tiny visual "press" down */
-.handle.grabbing {
-  transform: translate(0, -50%) scale(0.98);
-  box-shadow: 0 6px 16px rgba(176,127,43,0.18);
-}
-
-/* spotlight cone (soft from ceiling) */
-.spot-cone {
-  position: absolute;
-  left: 50%;
-  top: 8%;
-  transform: translateX(-50%);
-  width: 640px;
-  height: 420px;
-  pointer-events: none;
-  z-index: 3;
-  opacity: calc(var(--intensity) * 0.9);
-  mix-blend-mode: screen;
-  background: radial-gradient(
-    ellipse at 50% 0%,
-    rgba(255, 250, 220, 0.20) 0%,
-    rgba(255, 240, 200, 0.12) 20%,
-    rgba(0, 0, 0, 0) 60%
-  );
-  filter: blur(28px);
-  transition: opacity 120ms, transform 120ms;
-}
-
-/* glow centered on spot */
-.glow {
-  position: absolute;
-  left: var(--spot-x);
-  top: var(--spot-y);
-  transform: translate(-50%, -50%);
-  width: var(--spot-size);
-  height: var(--spot-size);
-  filter: blur(46px);
-  opacity: calc(var(--intensity));
-  pointer-events: none;
-  z-index: 5;
-  background: radial-gradient(
-    circle,
-    rgba(255, 250, 220, 0.9) 0%,
-    rgba(255, 250, 220, 0.25) 30%,
-    rgba(255, 250, 220, 0.04) 60%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  transition: width 140ms linear, height 140ms linear, opacity 140ms linear, left 120ms linear, top 120ms linear;
-}
-
-/* ground reflection */
-.ground-reflection {
-  position: absolute;
-  left: var(--spot-x);
-  top: calc(var(--spot-y) + 20vh);
-  transform: translateX(-50%) translateY(-10%);
-  width: 340px;
-  height: 80px;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 245, 200, 0.95),
-    rgba(255, 245, 200, 0.25) 40%,
-    rgba(0, 0, 0, 0) 70%
-  );
-  filter: blur(28px);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 160ms, transform 160ms, width 180ms, height 180ms;
-}
-
-/* text area centered in lit zone */
-.text-area {
-  position: absolute;
-  left: var(--spot-x);
-  top: calc(var(--spot-y) + 6vh);
-  transform: translate(-50%, -50%);
-  z-index: 6;
-  width: min(75ch, 90%);
-  max-width: 900px;
+.career-title {
   text-align: center;
-  pointer-events: none;
-}
-
-/* reveal text */
-.reveal-text {
-  font-size: 20px;
+  font-size: 42px;
   font-weight: 700;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: radial-gradient(
-    circle at var(--spot-x) var(--spot-y),
-    rgba(255, 250, 220, calc(var(--intensity))) 0%,
-    rgba(255, 250, 220, calc(var(--intensity) * 0.6)) 20%,
-    rgba(255, 250, 220, 0.06) 40%,
-    rgba(0, 0, 0, 0) 60%
-  );
-  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.8);
-  transition: background-position 80ms linear, background-size 120ms linear;
+  margin-bottom: 70px;
 }
 
-/* =======================
-   Pulling / Pulled State
-   ======================= */
-
-/* While the user is dragging/pulling: increase pull vars, tilt the rope and reveal light */
-.pull-rope-root.pulling {
-  /* the pull-distance is additive; you may update it via JS to reflect exact drag amount */
-  --tilt-angle: 6deg;
-  --intensity: 0.6;      /* gentle reveal while pulling */
-  --spot-size: 420px;
+.career-title span {
+  color: #2563eb;
 }
 
-/* stronger reveal when pulled enough (toggle .pulled via JS when threshold reached) */
-.pull-rope-root.pulled {
-  --tilt-angle: 10deg;
-  --intensity: 1;        /* fully on */
-  --spot-size: 520px;
-  /* raise the ground reflection visibility */
+
+.timeline {
+  position: relative;
 }
 
-/* ground reflection appears when pulled sufficiently */
-.pull-rope-root.pulled .ground-reflection {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  width: 520px;
-  height: 140px;
+.timeline::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  background: #2563eb;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-/* handle visual when actively grabbing */
-.pull-rope-root.pulling .handle,
-.pull-rope-root.pulled .handle {
-  box-shadow: 0 10px 30px rgba(176,127,43,0.28);
+.timeline-item {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  width: 50%;
 }
 
-/* tiny tilt of the handle relative to rope when pulled */
-.pull-rope-root.pulling .handle { transform: translate(0, -50%) rotate(2deg); }
-.pull-rope-root.pulled  .handle { transform: translate(0, -50%) rotate(4deg); }
+.timeline-item.left {
+  justify-content: flex-end;
+  text-align: right;
+}
 
-/* adapt for small screens */
-@media (max-width: 640px) {
-  .rope { right: calc(4% + 48px); }
-  .knot { right: calc(4% + 32px); }
-  .handle { --sz: 46px; right: 4%; }
-  .spot-cone { width: 420px; height: 260px; top: 6%; }
-  .glow { width: 260px; height: 260px; }
+.timeline-item.right {
+  margin-left: 50%;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.timeline-content {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  width: 90%;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-content .year {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.timeline-content h3 {
+  font-size: 20px;
+  margin: 8px 0 4px;
+}
+
+.timeline-content h4 {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.timeline-content p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ===== SKILLS ===== */
+
+.career-skills {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.career-skills h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.skills-grid span {
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* ===== CTA ===== */
+
+.career-cta {
+  margin-top: 90px;
+  background: #2563eb;
+  color: white;
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.career-cta h3 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.career-cta p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.career-cta a {
+  background: white;
+  color: #2563eb;
+  padding: 10px 26px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 10px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    margin-left: 0 !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding-left: 40px;
+  }
+
+  .career-title {
+    font-size: 32px;
+  }
 }

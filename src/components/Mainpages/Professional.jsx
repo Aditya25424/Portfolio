@@ -1,194 +1,104 @@
-// PullRope.jsx
-import React, { useEffect, useRef, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { motion } from "framer-motion";
 import "./Professional.css";
+import Navbar from '/src/components/navbar/Navbar'
 
-// ⬅️ Import your Navbar
-import Navbar from "../navbar/Navbar";
+const careerData = [
+  {
+    year: "JUNE 2025 - AUGUST 2025",
+    title: "Java & Spring Boot Intern",
+    company: "AzureSkynet Pvt. Ltd.",
+    description:
+      "Worked on backend development using Spring Boot, REST APIs, database integration, and security concepts.",
+  },
+  {
+    year: "JUNE 2024 - JULY 2024",
+    title: "Web Developer Intern",
+    company: "Oasis Infobyte",
+    description:
+      "Developed static websites like Starbucks landing page, portfolio website, and a temperature converter app using HTML, CSS, and JavaScript.",
+  },
+  {
+    year: "2022 - 2026",
+    title: "B.Tech (CSE)",
+    company: "DRONACHARYA COLLEGE OF ENGINEERING",
+    description:
+      "Studied core subjects including DSA, Java, Web Development, DBMS, Cloud Computing, and Cyber Security.",
+  },
+];
 
-export default function Professional({
-  text = "Pull the rope to switch the light on.",
-  keepOnThreshold = 0.55,
-}) {
-  const rootRef = useRef(null);
-  const handleRef = useRef(null);
-  const ropeRef = useRef(null);
-  const glowRef = useRef(null);
-  const groundRef = useRef(null);
-
-  const maxPullRef = useRef(Math.min(window.innerHeight * 0.45, 420));
-  const draggingRef = useRef(false);
-  const startYRef = useRef(0);
-
-  const [pull, setPull] = useState(0);
-
-  // ------------ (Rest of your existing rope logic stays the same) ------------
-  function applyFromPull(p) {
-    const baseSpotY = 6;
-    const spotY = baseSpotY + p * 18;
-    const spotX = 50;
-    const spotSize = 90 + p * 700;
-    const intensity = Math.min(1, p * 1.3);
-
-    const root = rootRef.current;
-    if (!root) return;
-    root.style.setProperty("--spot-x", `${spotX}%`);
-    root.style.setProperty("--spot-y", `${spotY}%`);
-    root.style.setProperty("--spot-size", `${spotSize}px`);
-    root.style.setProperty("--intensity", `${intensity}`);
-
-    if (glowRef.current) {
-      glowRef.current.style.left = `${spotX}%`;
-      glowRef.current.style.top = `${(spotY / 100) * window.innerHeight}px`;
-      glowRef.current.style.width = `${spotSize}px`;
-      glowRef.current.style.height = `${spotSize}px`;
-      glowRef.current.style.opacity = `${intensity}`;
-    }
-
-    if (groundRef.current) {
-      groundRef.current.style.width = `${Math.max(200, 240 + p * 800)}px`;
-      groundRef.current.style.height = `${Math.max(40, 40 + p * 180)}px`;
-      groundRef.current.style.opacity = `${intensity * 0.7}`;
-      groundRef.current.style.transform = `translateX(-50%) translateY(${p * 8}px) scale(${0.9 + p * 0.2})`;
-    }
-
-    if (ropeRef.current)
-      ropeRef.current.style.transform = `rotate(${(p * 6) - 3}deg)`;
-  }
-
-  useEffect(() => applyFromPull(pull), [pull]);
-
-  useEffect(() => {
-    function onResize() {
-      maxPullRef.current = Math.min(window.innerHeight * 0.45, 420);
-    }
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  function startDrag(clientY) {
-    draggingRef.current = true;
-    startYRef.current = clientY;
-    document.documentElement.style.cursor = "grabbing";
-  }
-
-  function moveDrag(clientY) {
-    if (!draggingRef.current) return;
-    const delta = clientY - startYRef.current;
-    const pulledPx = Math.max(0, Math.min(delta, maxPullRef.current));
-    const p = pulledPx / maxPullRef.current;
-    setPull(p);
-
-    if (handleRef.current)
-      handleRef.current.style.transform = `translate(-50%, -50%) translateY(${pulledPx}px)`;
-
-    if (rootRef.current) {
-      const ropeYpx = (18 / 100) * window.innerHeight + pulledPx;
-      rootRef.current.style.setProperty("--rope-y", `${ropeYpx}px`);
-    }
-  }
-
-  function endDrag() {
-    if (!draggingRef.current) return;
-    draggingRef.current = false;
-    document.documentElement.style.cursor = "";
-    if (pull >= keepOnThreshold) animateTo(1, 220);
-    else animateTo(0, 350);
-  }
-
-  function animateTo(target, dur = 240) {
-    const start = pull;
-    const diff = target - start;
-    const t0 = performance.now();
-
-    function step(now) {
-      const t = Math.max(0, Math.min(1, (now - t0) / dur));
-      const ease = 1 - Math.pow(1 - t, 3);
-      const cur = start + diff * ease;
-      setPull(cur);
-
-      const pulledPx = cur * maxPullRef.current;
-      if (handleRef.current)
-        handleRef.current.style.transform = `translate(-50%, -50%) translateY(${pulledPx}px)`;
-
-      if (rootRef.current) {
-        const ropeYpx = (18 / 100) * window.innerHeight + pulledPx;
-        rootRef.current.style.setProperty("--rope-y", `${ropeYpx}px`);
-      }
-
-      if (t < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  useEffect(() => {
-    const h = handleRef.current;
-    if (!h) return;
-
-    function onPointerDown(e) {
-      e.preventDefault();
-      if (h.setPointerCapture) h.setPointerCapture(e.pointerId);
-      startDrag(e.clientY);
-    }
-
-    function onPointerMove(e) {
-      if (!draggingRef.current) return;
-      moveDrag(e.clientY);
-    }
-
-    function onPointerUp(e) {
-      try { if (h.releasePointerCapture) h.releasePointerCapture(e.pointerId); } catch { }
-      endDrag();
-    }
-
-    h.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
-
-    return () => {
-      h.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerUp);
-    };
-  }, [pull]);
-
+const Professional = () => {
   return (
-    <>
-      {/* HERE IS YOUR NAVBAR */}
+    <div >  
       <Navbar />
+    <section className="career-section">
+      
+      <div className="career-container">
 
-      {/* Rope + spotlight area */}
-      <div
-        ref={rootRef}
-        className="pull-rope-root"
-        style={{
-          "--rope-y": "18vh",
-          "--spot-x": "50%",
-          "--spot-y": "6%",
-          "--spot-size": "0px",
-          "--intensity": "0",
-        }}
-      >
-        <div className="rope-wrap">
-          <div ref={ropeRef} className="rope" />
-          <button ref={handleRef} className="handle" aria-label="Pull the rope">
-            <svg width="28" height="28" viewBox="0 0 24 24">
-              <circle r="2" fill="rgba(0,0,0,0.06)" />
-              <rect x="10" y="11" width="4" height="7" rx="1.5" fill="rgba(0,0,0,0.08)" />
-            </svg>
-          </button>
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="career-title"
+        >
+          My <span>Career Journey</span>
+        </motion.h2>
 
-          <div ref={glowRef} className="glow" />
+        <div className="timeline">
+          {careerData.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
+            >
+              <div className="timeline-content">
+                <span className="year">{item.year}</span>
+                <h3>{item.title}</h3>
+                <h4>{item.company}</h4>
+                <p>{item.description}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="spot-cone" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="career-skills"
+        >
+          <h3>Technical Skills</h3>
+          <div className="skills-grid">
+            <span>React</span>
+            <span>Java</span>
+            <span>Spring Boot</span>
+            <span>Node.js</span>
+            <span>MongoDB</span>
+            <span>MySQL</span>
+            <span>AWS</span>
+            <span>Tailwind CSS</span>
+            <span>Git & GitHub</span>
+          </div>
+        </motion.div>
 
-        <div ref={groundRef} className="ground-reflection" />
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="career-cta"
+        >
+          <h3>Looking for Opportunities</h3>
+          <p>I am actively seeking full-time roles and internships in Full Stack & Cloud Development.</p>
+          <a href={"/HireMe"}>Hire Me</a>
+        </motion.div>
 
-        <div className="text-area">
-          <div className="reveal-text">{text}</div>
-          <div className="hint">(Pull the rope to reveal the light)</div>
-        </div>
       </div>
-    </>
+    </section>
+    </div>
   );
-}
+};
+
+export default Professional;
