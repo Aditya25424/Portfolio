@@ -1,6 +1,7 @@
 import React from 'react'
 import "./HireMe.css"
 import Navbar from '/src/components/navbar/Navbar'
+import Contact from '../../assets/background/Contact-turtle.png'
 const HireMe = () => {
     return (
         <div>
@@ -10,7 +11,7 @@ const HireMe = () => {
                     <Navbar />
                     <div className='HireMe-container'>
                         <div className='Hire-left'>
-                            <img src="/src/assets/background/Contact-turtle.png" alt="" />
+                            <img src={Contact} alt="" />
                         </div>
                         <div className='Hire-right'>
                             <h1>CONTACT ME</h1>
