@@ -1,4 +1,6 @@
 import React from 'react'
+
+
 import './MoreReasons.css'
 const MoreReasons = () => {
     const reasons_to_hire_me = [
