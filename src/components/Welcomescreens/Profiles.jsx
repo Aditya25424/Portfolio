@@ -3,7 +3,7 @@ import "./Profiles.css";
 import { useNavigate } from "react-router-dom";
 
 import Developer from "../../assets/userlogo/Developer.png"; 
-import Stalker from "../../assets/userlogo/Stalker.jpg"; 
+import Stalker from "../../assets/userlogo/Stalker.png"; 
 import Adventure from "../../assets/userlogo/Adventurer.png"; 
 import Recruiter from "../../assets/userlogo/Recruiter.png"; 
 import Surprised from "../../assets/userlogo/Surprised.png"; 
