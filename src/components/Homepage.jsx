@@ -6,7 +6,7 @@ import MoreReasons from './PAGES/MoreReasons'
 
 export const Homepage = () => {
     return (
-        <div>
+       <div className="page-with-navbar">
             <Navbar />
             <Home />
             <Todayspicks />

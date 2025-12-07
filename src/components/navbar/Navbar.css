@@ -1,81 +1,85 @@
-.navbar{
-    align-items: center;
-    background-image: linear-gradient(180deg, #000001e6 10%, #0F0F0F);
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+.navbar {
+  position: fixed;   /* ✅ Prevents jumping & overlap */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  z-index: 999;
 
-    top: 0;
-    transition: background-color .3s ease;
-    width: 100%;
-    z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-}
-.navbar span{
-    color: #1A98FF;
-
-}
-.navbar h2{
-    color: #E50914;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight:800;
-}
-.navbar-left{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-
+  padding: 0 20px;
+  background-image: linear-gradient(180deg, #000001e6 10%, #0F0F0F);
+  color: #fff;
 }
 
-a{
-    color: #fff;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight:600;
+.navbar span {
+  color: #1A98FF;
 }
-.navbar-right img{
 
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+.navbar h2 {
+  color: #E50914;
+  margin: 0 15px;
+  font-weight: 800;
+  font-size: 18px;
+  cursor: pointer;
 }
-a:hover{
-    color: #E50914;
-    transition: color 0.3s;
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
 }
-.navbar.scrolled{
-    background-color: #141414;
+
+/* ✅ FIXED: Only navbar links affected, not global <a> */
+.navbar-left a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
 }
-/* ✅ MOBILE RESPONSIVE NAVBAR */
+
+.navbar-left a:hover {
+  color: #E50914;
+  transition: color 0.3s;
+}
+
+.navbar-right img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navbar.scrolled {
+  background-color: #141414;
+}
+
+/* ✅ PUSH CONTENT DOWN SO IT DOESN’T HIDE UNDER FIXED NAVBAR */
+.page-with-navbar {
+  padding-top: 70px;
+}
+
+/* ✅ MOBILE RESPONSIVE */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 12px 14px;
+    padding: 0 14px;
   }
 
   .navbar-left {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    gap: 10px;
   }
 
   .navbar h2 {
-    margin: 0 0 10px 0;
-    font-size: 18px;
+    font-size: 16px;
   }
 
-  a {
-    margin: 8px 0;
-    font-size: 14px;
-  }
-
-  .navbar-right {
-    position: absolute;
-    right: 14px;
-    top: 14px;
+  .navbar-left a {
+    font-size: 12px;
   }
 
   .navbar-right img {
@@ -86,12 +90,12 @@ a:hover{
 
 /* ✅ EXTRA SMALL DEVICES */
 @media (max-width: 480px) {
-  .navbar h2 {
-    font-size: 16px;
+  .navbar-left a {
+    font-size: 11px;
   }
 
-  a {
-    font-size: 13px;
+  .navbar h2 {
+    font-size: 15px;
   }
 
   .navbar-right img {

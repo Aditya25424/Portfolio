@@ -56,3 +56,34 @@ align-items: center;
     transform: scale(1.02);
 
 }
+
+@media (max-width: 768px) {
+    .home {
+        flex-direction: column;
+        height: auto;
+        background-size: cover;
+        background-position: center;
+        padding: 40px 20px;
+        margin: 4px;
+    }
+    
+    .home-text {
+        margin: 20px 0;
+    text-align: center;
+    }
+    
+    .home-text h1 {
+        text-align: left;
+        font-size: 200%;
+    }
+    
+    .home-text p {
+        text-align: left;
+        font-size: 100%;
+        max-width: 100%;
+    }
+    
+    .home-buttons {
+        gap: 15px;
+    }
+}

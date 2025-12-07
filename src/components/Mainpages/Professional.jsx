@@ -29,7 +29,7 @@ const careerData = [
 
 const Professional = () => {
   return (
-    <div >  
+   <div className="page-with-navbar">
       <Navbar />
     <section className="career-section">
       

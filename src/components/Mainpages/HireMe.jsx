@@ -7,7 +7,7 @@ const HireMe = () => {
         <div>
            
                 <div className='hire-top'>
-                    <div >
+                    <div className="page-with-navbar">
                     <Navbar />
                     <div className='HireMe-container'>
                         <div className='Hire-left'>

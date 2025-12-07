@@ -38,7 +38,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <div>
+    <div className="page-with-navbar">
      < Navbar />
 <section id="projects" className="projects-section">
   <div className="projects-container">

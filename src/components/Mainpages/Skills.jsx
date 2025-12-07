@@ -9,6 +9,7 @@ const Skills = () => {
     <div>
       <div className='Skills-container'>
         <div className='Skills-top'>
+          <div className="page-with-navbar">
           <Navbar />
         </div>
         <div className='Skills-bottom'>
@@ -38,6 +39,7 @@ const Skills = () => {
               <button>canva <SiCanva /></button>
               <button>Android <FaAndroid /></button>
             </div>
+          </div>
           </div>
         </div>
       </div>

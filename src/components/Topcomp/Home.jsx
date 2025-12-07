@@ -4,7 +4,7 @@ import { Linkedin } from 'lucide-react';
 
 const Home = () => {
     function downloadResume() {
-        window.open("https://drive.google.com/file/d/1WBO2BKi6zlVNi7g36UEuLWSBJ_Wp7iDw/view?usp=sharing");
+        window.open("https://drive.google.com/file/d/1mDIvsIAIcIpESmhHqVkjwELrRX2QxGvc/view?usp=sharing", "_blank");
 }
     function openLinkedIn() {
   window.open("https://www.linkedin.com/in/adityasha2003/", "_blank");
