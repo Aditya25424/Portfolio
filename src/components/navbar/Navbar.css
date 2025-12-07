@@ -48,3 +48,54 @@ a:hover{
 .navbar.scrolled{
     background-color: #141414;
 }
+/* ✅ MOBILE RESPONSIVE NAVBAR */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 14px;
+  }
+
+  .navbar-left {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .navbar h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+
+  a {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .navbar-right {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+  }
+
+  .navbar-right img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ✅ EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+  .navbar h2 {
+    font-size: 16px;
+  }
+
+  a {
+    font-size: 13px;
+  }
+
+  .navbar-right img {
+    width: 26px;
+    height: 26px;
+  }
+}
