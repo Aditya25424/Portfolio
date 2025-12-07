@@ -1,5 +1,5 @@
 import React from 'react'
-import Stalker from "/src/assets/userlogo/stalker.jpg";
+
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 

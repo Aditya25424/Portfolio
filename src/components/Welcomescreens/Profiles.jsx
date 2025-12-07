@@ -22,8 +22,8 @@ const Profiles = () => {
   const handleprofile = (profile) => {
     navigate("/homepage", {
       state: {
-        userType: profile.name,   // ✅ user ka naam
-        userImage: profile.img   // ✅ user ki image
+        userType: profile.name,
+        userImage: profile.img  
       },
     });
   };

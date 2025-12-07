@@ -2,10 +2,11 @@
 import { motion } from "framer-motion";
 import Navbar from '/src/components/navbar/Navbar'
 
-import bloodunity from "../src/assets/projects/Bloodunity.png";
-import esper from "../src/assets/projects/esper.png";
-import dronathon from "../src/assets/projects/Dronathon.png";
+import bloodunity from "../../assets/projects/Bloodunity.png";
+import esper from "../../assets/projects/esper.png";
+import dronathon from "../../assets/projects/Dronathon.png";
 import "./Projects.css";
+
 
 
 const projects = [
@@ -35,12 +36,10 @@ const projects = [
   },
 ];
 
-
-
 const Projects = () => {
   return (
     <div>
-      <Navbar />
+     < Navbar />
 <section id="projects" className="projects-section">
   <div className="projects-container">
 
