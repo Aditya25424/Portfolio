@@ -2,11 +2,11 @@ import React from "react";
 import "./Profiles.css";
 import { useNavigate } from "react-router-dom";
 
-import Developer from "../../assets/userlogo/Developer.png"; 
-import Stalker from "../../assets/userlogo/stalker.jpg"; 
-import Adventure from "../../assets/userlogo/Adventurer.png"; 
-import Recruiter from "../../assets/userlogo/Recruiter.png"; 
-import Surprised from "../../assets/userlogo/Suprised.png"; 
+import Developer from "../src/assets/userlogo/Developer.png"; 
+import Stalker from "../src/assets/userlogo/stalker.jpg"; 
+import Adventure from "../src/assets/userlogo/Adventurer.png"; 
+import Recruiter from "../src/assets/userlogo/Recruiter.png"; 
+import Surprised from "../src/assets/userlogo/Suprised.png"; 
 
 const profiles = [
   { name: "Developer", img: Developer },
