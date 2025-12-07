@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import './Navbar.css'
 const Navbar = () => {
       const location = useLocation();
-  const userImage = location.state.userImage ;
+  const userImage = location.state?.userImage ;
 
     const navigate = useNavigate();
       const goToHome = () => {
